@@ -5,12 +5,6 @@
 <h3 align="center">A Windows 11 inspired theme for Playnite.</h3>
 
 <p align="center">
-  <a href="https://github.com/Arstidir/Fluent11/releases/latest"><img src="https://img.shields.io/github/v/release/Arstidir/Fluent11?style=for-the-badge&label=Latest%20release&color=0067C0" alt="Latest release"></a>
-  <a href="https://github.com/Arstidir/Fluent11/releases"><img src="https://img.shields.io/github/downloads/Arstidir/Fluent11/total?cacheSeconds=3600&style=for-the-badge&label=Downloads&color=0067C0" alt="Downloads"></a>
-  <a href="https://github.com/Arstidir/Fluent11/stargazers"><img src="https://img.shields.io/github/stars/Arstidir/Fluent11?style=for-the-badge&label=Stars&color=0067C0" alt="Stars"></a>
-</p>
-
-<p align="center">
   <img src="docs/hero-light-dark.gif" alt="Fluent 11 switching between light and dark with Windows" width="85%">
 </p>
 
