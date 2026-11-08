@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/Arstidir/Fluent11/releases/latest"><img src="https://img.shields.io/github/v/release/Arstidir/Fluent11?style=for-the-badge&label=Latest%20release&color=0067C0" alt="Latest release"></a>
-  <a href="https://github.com/Arstidir/Fluent11/releases"><img src="https://img.shields.io/github/downloads/Arstidir/Fluent11/total?style=for-the-badge&label=Downloads&color=0067C0" alt="Downloads"></a>
+  <a href="https://github.com/Arstidir/Fluent11/releases"><img src="https://img.shields.io/github/downloads/Arstidir/Fluent11/total?cacheSeconds=3600&style=for-the-badge&label=Downloads&color=0067C0" alt="Downloads"></a>
   <a href="https://github.com/Arstidir/Fluent11/stargazers"><img src="https://img.shields.io/github/stars/Arstidir/Fluent11?style=for-the-badge&label=Stars&color=0067C0" alt="Stars"></a>
 </p>
 
@@ -121,3 +121,7 @@ All options are in **Add-ons (F9) > Extension settings > Generic > Fluent 11 Hel
 
 - Windows 11
 - Playnite 10 (latest version)
+
+## AI assistance
+
+Fluent 11 and Fluent 11 Helper were built with the help of AI (Claude by Anthropic). Every change was reviewed and tested by hand.
