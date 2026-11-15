@@ -1,0 +1,12 @@
+Id: Fluent11Helper_fc7e2b69-0066-4f06-919e-86ad1f39cc62
+Name: Fluent 11 Helper
+Author: Rembihnutur
+Version: 1.2.0
+Module: Fluent11Helper.dll
+Icon: icon.png
+Type: GenericPlugin
+Links:
+  - Name: GitHub
+    Url: https://github.com/Arstidir/Fluent11
+  - Name: Discord
+    Url: https://discord.com/channels/365863063296933888/1559232305422274663
