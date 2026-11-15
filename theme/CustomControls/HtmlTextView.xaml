@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF">
+
+    <Style TargetType="{x:Type HtmlTextView}">
+        <Setter Property="HtmlForeground" Value="{DynamicResource TextColor}" />
+        <Setter Property="LinkForeground" Value="{DynamicResource GlyphColor}" />
+        <Setter Property="HtmlFontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="HtmlFontSize" Value="{DynamicResource FontSize}" />
+        <Style.Resources>
+            <Style TargetType="{x:Type html:HtmlPanel}" />
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="{x:Type html:HtmlPanel}">
+        <Setter Property="BaseStylesheet" Value="{DynamicResource HtmlPanelStylesheet}" />
+    </Style>
+</ResourceDictionary>

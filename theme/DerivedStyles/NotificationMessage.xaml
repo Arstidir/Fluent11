@@ -1,0 +1,49 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    mc:Ignorable="d">
+
+    <Style x:Key="NotificationMessage" TargetType="Button">
+        <Setter Property="Command" Value="{Binding ActivateCommand}" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid d:DataContext="{x:Static DesignMainViewModel.DesignNotificationIntance}">
+                        <Border Background="{DynamicResource SurfaceCardBrush}"
+                                BorderBrush="{DynamicResource CardStrokeBrush}" BorderThickness="1"
+                                CornerRadius="{DynamicResource CardCornerRadius}" />
+                        <Border x:Name="Overlay" Background="Transparent"
+                                CornerRadius="{DynamicResource CardCornerRadius}" />
+                        <DockPanel Margin="14,12,6,12">
+                            <TextBlock x:Name="TypeIcon" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,2,12,0"
+                                       Text="&#xE946;" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                       Foreground="{DynamicResource AccentBrush}" />
+                            <Button x:Name="CloseButton" DockPanel.Dock="Right" VerticalAlignment="Top" Margin="4,-6,0,0"
+                                    Width="28" Height="28" Padding="0" Cursor="Arrow" Visibility="Hidden"
+                                    Content="&#xE8BB;" FontFamily="{DynamicResource FluentIconFont}" FontSize="10"
+                                    Foreground="{DynamicResource TextBrushDarker}"
+                                    Background="Transparent" BorderThickness="0"
+                                    Command="{Binding CloseCommand}"/>
+                            <TextBlock Text="{Binding Text}"
+                                       Style="{DynamicResource BaseTextBlockStyle}"
+                                       LineHeight="20" TextWrapping="Wrap" />
+                        </DockPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Type}" Value="Error">
+                            <Setter Property="Text" Value="&#xE783;" TargetName="TypeIcon" />
+                            <Setter Property="Foreground" Value="{DynamicResource CriticalBrush}" TargetName="TypeIcon" />
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" TargetName="Overlay" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="CloseButton" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

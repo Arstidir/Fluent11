@@ -1,0 +1,138 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Margin="24,24,24,24" TextElement.Foreground="{DynamicResource TextBrush}">
+    <Grid.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}" />
+        <Style x:Key="TtbCaption" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+        </Style>
+        <Style x:Key="TtbIcon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{DynamicResource FluentIconFont}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,1,8,0" />
+        </Style>
+        <Style x:Key="TtbTime" TargetType="Border">
+            <Setter Property="Padding" Value="12,2" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeBrush}" />
+            <Setter Property="BorderThickness" Value="0,0,1,0" />
+        </Style>
+        <Style x:Key="TtbDot" TargetType="Ellipse">
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Height" Value="10" />
+            <Setter Property="Margin" Value="0,1,8,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Grid.Resources>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <DockPanel Grid.Row="0">
+        <Border DockPanel.Dock="Left" Width="{DynamicResource Fluent11LargeCoverWidth}" Height="160" Margin="0,0,24,0"
+                CornerRadius="{DynamicResource CardCornerRadius}"
+                Background="{DynamicResource GridItemBackgroundBrush}">
+            <Border CornerRadius="{DynamicResource CardCornerRadius}">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding Cover, Converter={StaticResource ImageStringToImageConverterCached}}"
+                                Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" />
+                </Border.Background>
+                <Border CornerRadius="{DynamicResource CardCornerRadius}" Style="{DynamicResource ImageStrokeOverlay}" />
+            </Border>
+        </Border>
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="{Binding Name}" FontFamily="{DynamicResource FontFamilyDisplay}" FontWeight="SemiBold"
+                       FontSize="{DynamicResource FontSizeLargest}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                       LineStackingStrategy="BlockLineHeight" LineHeight="36" MaxHeight="72" />
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <TextBlock Text="&#xE121;" Style="{StaticResource TtbIcon}" Margin="0,1,6,0" Foreground="{DynamicResource TextBrushDarker}" />
+                <TextBlock Foreground="{DynamicResource TextBrushDarker}" VerticalAlignment="Center">
+                    <Run Text="{Binding PlayedText, Mode=OneWay}" /><Run Text=" played" />
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                <Button Tag="TtbRefresh" ToolTip="Search HowLongToBeat again for this game">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE72C;" Style="{StaticResource TtbIcon}" />
+                        <TextBlock Text="Refresh" />
+                    </StackPanel>
+                </Button>
+                <Button Tag="TtbDelete" Margin="8,0,0,0" Padding="0" ToolTip="Remove the HowLongToBeat data of this game"
+                        Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                    <TextBlock Text="&#xE74D;" Style="{StaticResource TtbIcon}" Margin="0" HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+
+    <Border Grid.Row="1" Style="{DynamicResource SurfaceCard}" Margin="0,24,0,0" Padding="20,18">
+        <StackPanel>
+            <DockPanel Margin="0,0,0,14">
+                <TextBlock DockPanel.Dock="Right" Text="{Binding ProgressText}" Style="{StaticResource TtbCaption}" VerticalAlignment="Center" />
+                <TextBlock Text="Progress" FontSize="{DynamicResource FontSizeLarge}" FontWeight="SemiBold" />
+            </DockPanel>
+            <Grid Height="20">
+                <Grid Height="6" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding Segment1}" MinWidth="128" />
+                        <ColumnDefinition Width="{Binding Segment2}" MinWidth="128" />
+                        <ColumnDefinition Width="{Binding Segment3}" MinWidth="128" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Margin="0,0,2,0" CornerRadius="3,0,0,3" Background="{DynamicResource TimeMainBrush}" />
+                    <Border Grid.Column="1" Margin="0,0,2,0" Background="{DynamicResource TimeExtraBrush}" />
+                    <Border Grid.Column="2" CornerRadius="0,3,3,0" Background="{DynamicResource TimeCompletionistBrush}" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding PlayedPart}" />
+                        <ColumnDefinition Width="{Binding RestPart}" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1" Width="20" Height="20" HorizontalAlignment="Left" Margin="-10,0,0,0"
+                          ToolTip="{Binding PlayedText}">
+                        <Ellipse Fill="{DynamicResource ControlSolidFillBrush}" Stroke="{DynamicResource ControlStrokeBrush}" StrokeThickness="1" />
+                        <Ellipse Width="10" Height="10" Fill="{DynamicResource AccentBrush}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Margin="0,12,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding Segment1}" MinWidth="128" />
+                    <ColumnDefinition Width="{Binding Segment2}" MinWidth="128" />
+                    <ColumnDefinition Width="{Binding Segment3}" MinWidth="128" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Style="{StaticResource TtbTime}" Padding="0,2,12,2">
+                    <StackPanel HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Ellipse Style="{StaticResource TtbDot}" Fill="{DynamicResource TimeMainBrush}" />
+                            <TextBlock Text="{Binding Label1}" Foreground="{DynamicResource TextBrushDarker}" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Value1}" HorizontalAlignment="Right" Margin="0,4,0,0"
+                                   FontSize="{DynamicResource FontSizeLarge}" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource TtbTime}">
+                    <StackPanel HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Ellipse Style="{StaticResource TtbDot}" Fill="{DynamicResource TimeExtraBrush}" />
+                            <TextBlock Text="{Binding Label2}" Foreground="{DynamicResource TextBrushDarker}" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Value2}" HorizontalAlignment="Right" Margin="0,4,0,0"
+                                   FontSize="{DynamicResource FontSizeLarge}" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource TtbTime}" Padding="12,2,0,2" BorderThickness="0">
+                    <StackPanel HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Ellipse Style="{StaticResource TtbDot}" Fill="{DynamicResource TimeCompletionistBrush}" />
+                            <TextBlock Text="{Binding Label3}" Foreground="{DynamicResource TextBrushDarker}" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Value3}" HorizontalAlignment="Right" Margin="0,4,0,0"
+                                   FontSize="{DynamicResource FontSizeLarge}" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Grid>

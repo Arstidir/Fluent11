@@ -1,0 +1,428 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent" TextElement.Foreground="{DynamicResource TextBrush}">
+    <Grid.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}" />
+        <Style x:Key="StatsCaption" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style x:Key="StatsText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style x:Key="StatsBarButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Margin" Value="2,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" />
+                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtlePressedBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StatsRowButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Tag" Value="StatsOpenGame" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}"
+                                Padding="8,5" Margin="0,1">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtlePressedBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="StatsBarTemplate">
+            <Grid Height="26">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="48" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,12,0" Style="{StaticResource StatsCaption}" />
+                <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" Grid.Column="1" VerticalAlignment="Center" Minimum="0" Maximum="100"
+                             Value="{Binding Percent, Mode=OneWay}" />
+                <TextBlock Grid.Column="2" Text="{Binding Count}" VerticalAlignment="Center" TextAlignment="Right" Style="{StaticResource StatsText}" />
+            </Grid>
+        </DataTemplate>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="48" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Grid Grid.Row="0" Margin="0,0,146,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border x:Name="LeftSpace" Margin="0,0,12,0" />
+        <SearchBox x:Name="SearchBox" Grid.Column="1" Tag="{DynamicResource LOCSearchLabel}"
+                   Width="220" Height="32" VerticalAlignment="Center"
+                   WindowChrome.IsHitTestVisibleInChrome="True" />
+    </Grid>
+    <DockPanel Grid.Row="0" Margin="0,0,146,0">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
+            <TextBlock Text="{Binding FilterText}" Style="{StaticResource StatsCaption}" VerticalAlignment="Center" Margin="0,0,6,0" />
+            <Grid>
+                <Button Style="{StaticResource StatsBarButton}" Content="&#xE71C;" Tag="StatsFilterMenu" ToolTip="Filter" />
+                <Ellipse Width="6" Height="6" Fill="{DynamicResource AccentBrush}" IsHitTestVisible="False"
+                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0"
+                         Visibility="{Binding IsFilterActive, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+        </StackPanel>
+        <Border DockPanel.Dock="Right">
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource TopPanelSeparator}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=SearchBox}" Value="Collapsed">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <DockPanel LastChildFill="False" ClipToBounds="True">
+            <DockPanel.Style>
+                <Style TargetType="DockPanel">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="MaxWidth" Value="{Binding ActualWidth, ElementName=LeftSpace}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=SearchBox}" Value="Collapsed">
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="MaxWidth" Value="Infinity" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+            <TextBlock DockPanel.Dock="Left" Text="Insights" Width="160" Margin="4,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                       FontSize="{DynamicResource FontSizeLarger}" FontWeight="SemiBold" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="DockPanel.Dock" Value="Left" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visibility, ElementName=SearchBox}" Value="Collapsed">
+                                <Setter Property="DockPanel.Dock" Value="Right" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="{Binding SortText}" Style="{StaticResource StatsCaption}" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <Button Style="{StaticResource StatsBarButton}" Content="&#xE8CB;" Tag="StatsSortMenu" ToolTip="Sort" />
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+
+    <Grid Grid.Row="1" Margin="24,20,0,0" Style="{DynamicResource Fluent11PageEntrance}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="360" />
+            <ColumnDefinition Width="360" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Margin="0,-20,32,0" BorderThickness="0,0,1,0" IsHitTestVisible="False"
+                x:Name="PanelSeparator"
+                BorderBrush="{DynamicResource PanelSeparatorBrush}" CornerRadius="{DynamicResource ControlCornerRadius}" />
+        <DockPanel Grid.Column="0" Margin="0,0,32,0">
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,8,12" LastChildFill="False">
+                <TextBlock Text="Games" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0" VerticalAlignment="Center" />
+                <TextBlock Style="{StaticResource StatsCaption}" Margin="8,2,0,0" VerticalAlignment="Center"
+                           Text="{Binding Games.Count, FallbackValue=''}" />
+            </DockPanel>
+
+            <Grid>
+                <ItemsControl x:Name="GameList" ItemsSource="{Binding Games}"
+                              VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                              VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" Padding="0,0,8,0">
+                                <ItemsPresenter Margin="0,0,0,16" />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource StatsRowButton}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="160" />
+                                        <ColumnDefinition Width="110" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="{DynamicResource Fluent11ListCoverWidth}" Height="32" Margin="0,0,12,0"
+                                            HorizontalAlignment="Left" CornerRadius="4">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Converter={StaticResource Fluent11ListArtConverter}}"
+                                                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" />
+                                        </Border.Background>
+                                        <Border CornerRadius="4" Style="{DynamicResource ImageStrokeOverlay}" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource StatsText}" />
+                                        <TextBlock Text="{Binding Info}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock" BasedOn="{StaticResource StatsCaption}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Info}" Value="">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,16,0"
+                                                 Minimum="0" Maximum="100" Value="{Binding Share, Mode=OneWay}" />
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding PlaytimeText}" Style="{StaticResource StatsText}" TextAlignment="Right" />
+                                        <TextBlock Text="{Binding LastActivity, StringFormat='{}{0:d}', TargetNullValue=''}"
+                                                   Style="{StaticResource StatsCaption}" TextAlignment="Right" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Popup x:Name="GameFlyout" Placement="Bottom" StaysOpen="True"
+                       AllowsTransparency="{DynamicResource Fluent11PopupTransparent}"
+                       PopupAnimation="None" Focusable="False">
+                    <Grid Style="{DynamicResource PopupRoot}">
+                        <Grid.Resources>
+                            <Style x:Key="FlyoutLabel" TargetType="TextBlock" BasedOn="{StaticResource StatsCaption}" />
+                            <Style x:Key="FlyoutValue" TargetType="TextBlock" BasedOn="{StaticResource StatsText}">
+                                <Setter Property="Margin" Value="0,1,0,6" />
+                            </Style>
+                        </Grid.Resources>
+                        <Border x:Name="FlyoutShadow" Style="{DynamicResource PopupShadow}" />
+                        <Border x:Name="FlyoutCard" Style="{DynamicResource PopupBorder}" Width="420" Padding="16">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border Width="{DynamicResource Fluent11FlyoutCoverWidth}" Height="48" Margin="0,0,12,0" CornerRadius="4"
+                                            VerticalAlignment="Top">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Game.Cover, Converter={StaticResource ImageStringToImageConverterCached}}"
+                                                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" />
+                                        </Border.Background>
+                                        <Border CornerRadius="4" Style="{DynamicResource ImageStrokeOverlay}" />
+                                    </Border>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource StatsText}" TextTrimming="None" TextWrapping="Wrap"
+                                                   MaxHeight="40" FontWeight="SemiBold" />
+                                        <TextBlock Text="{Binding SubText}" Style="{StaticResource StatsCaption}" Margin="0,2,0,0" />
+                                    </StackPanel>
+                                </DockPanel>
+
+                                <DockPanel Margin="0,12,0,10">
+                                    <TextBlock DockPanel.Dock="Right" Style="{StaticResource StatsCaption}" VerticalAlignment="Bottom" Margin="12,0,0,3"
+                                               ToolTip="Share of your total playtime and rank by time played">
+                                        <Run Text="{Binding ShareText, Mode=OneWay}" /><Run Text=" · " /><Run Text="{Binding RankText, Mode=OneWay}" />
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding PlaytimeText}" Style="{StaticResource StatsText}"
+                                               FontSize="{DynamicResource FontSizeLarger}" FontWeight="SemiBold" />
+                                </DockPanel>
+
+                                <UniformGrid Columns="3">
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Sessions" Style="{StaticResource FlyoutLabel}" />
+                                        <TextBlock Text="{Binding SessionsText}" Style="{StaticResource FlyoutValue}" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Avg. per session" Style="{StaticResource FlyoutLabel}" />
+                                        <TextBlock Text="{Binding AverageText}" Style="{StaticResource FlyoutValue}" />
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="Install size" Style="{StaticResource FlyoutLabel}" />
+                                        <TextBlock Text="{Binding SizeText}" Style="{StaticResource FlyoutValue}" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Last played" Style="{StaticResource FlyoutLabel}" />
+                                        <TextBlock Text="{Binding LastPlayedText}" Style="{StaticResource FlyoutValue}" Margin="0,2,0,0" />
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Added" Style="{StaticResource FlyoutLabel}" />
+                                        <TextBlock Text="{Binding AddedText}" Style="{StaticResource FlyoutValue}" Margin="0,2,0,0" />
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="Status" Style="{StaticResource FlyoutLabel}" />
+                                        <TextBlock Text="{Binding StatusText}" Style="{StaticResource FlyoutValue}" Margin="0,2,0,0" />
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding HasTimeToBeat}" Value="False" />
+                                                        <Condition Binding="{Binding HasAchievements}" Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <UniformGrid Rows="1">
+                                        <StackPanel Margin="0,0,8,0"
+                                                    Visibility="{Binding HasTimeToBeat, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <DockPanel>
+                                                <TextBlock DockPanel.Dock="Right" Text="{Binding TimeToBeatPercentText}" Style="{StaticResource StatsText}" />
+                                                <TextBlock Text="Time to beat" Style="{StaticResource StatsCaption}" />
+                                            </DockPanel>
+                                            <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" Margin="0,6,0,4" Minimum="0" Maximum="100"
+                                                         Value="{Binding TimeToBeatPercent, Mode=OneWay}" />
+                                            <TextBlock Text="{Binding TimeToBeatText}" Style="{StaticResource StatsCaption}" />
+                                        </StackPanel>
+                                        <StackPanel Margin="8,0,0,0"
+                                                    Visibility="{Binding HasAchievements, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <DockPanel>
+                                                <TextBlock DockPanel.Dock="Right" Text="{Binding AchievementsPercentText}" Style="{StaticResource StatsText}" />
+                                                <TextBlock Text="Achievements" Style="{StaticResource StatsCaption}" />
+                                            </DockPanel>
+                                            <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" Margin="0,6,0,4" Minimum="0" Maximum="100"
+                                                         Value="{Binding AchievementsPercent, Mode=OneWay}" />
+                                            <TextBlock Text="{Binding AchievementsText}" Style="{StaticResource StatsCaption}" />
+                                        </StackPanel>
+                                    </UniformGrid>
+                                </Grid>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+                                    <Button x:Name="FlyoutLibrary" Content="Show in library" Margin="0,0,8,0" />
+                                    <Button x:Name="FlyoutPlay" Tag="Fluent11Primary" Content="{Binding ActionText}" MinWidth="80" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Popup>
+
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24" IsHitTestVisible="False">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Items.Count, ElementName=GameList}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <TextBlock Text="&#xE8A1;" FontFamily="{DynamicResource FluentIconFont}" FontSize="48" Foreground="{DynamicResource TextBrushDarker}" HorizontalAlignment="Center" Margin="0,0,0,16" />
+                    <TextBlock Text="No games to show" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"
+                               FontSize="{DynamicResource FontSizeLarge}" FontWeight="SemiBold" />
+                    <TextBlock Text="No games match the current filter." TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,4,0,0"
+                               Foreground="{DynamicResource TextBrushDarker}" />
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+
+        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" Padding="0,0,24,0" Margin="0,-20,0,0">
+            <StackPanel Margin="0,20,0,16">
+                <TextBlock Text="Overview" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource SurfaceCard}" Margin="0,0,0,28">
+                    <StackPanel>
+                        <TextBlock>
+                            <Run Text="{Binding Total, Mode=OneWay}" FontSize="{DynamicResource FontSizeLargest}" FontWeight="SemiBold" />
+                            <Run Text=" games" Foreground="{DynamicResource TextBrushDarker}" />
+                        </TextBlock>
+                        <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" Margin="0,8,0,16" Minimum="0" Maximum="100"
+                                     Value="{Binding InstalledPercent, Mode=OneWay}" ToolTip="Installed" />
+                        <UniformGrid Columns="3" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Installed" Style="{StaticResource StatsCaption}" />
+                                <TextBlock Text="{Binding Installed}" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Played" Style="{StaticResource StatsCaption}" />
+                                <TextBlock Text="{Binding PlayedCount}" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Favorites" Style="{StaticResource StatsCaption}" />
+                                <TextBlock Text="{Binding Favorites}" FontWeight="SemiBold" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <Border Height="1" Background="{DynamicResource PanelSeparatorBrush}" Margin="0,0,0,12" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26" />
+                                <RowDefinition Height="26" />
+                                <RowDefinition Height="26" />
+                                <RowDefinition Height="26" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Time played" VerticalAlignment="Center" Style="{StaticResource StatsCaption}" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding PlaytimeText}" />
+                            <TextBlock Grid.Row="1" Text="Average per played game" VerticalAlignment="Center" Style="{StaticResource StatsCaption}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding AverageText}" />
+                            <TextBlock Grid.Row="2" Text="Install size" VerticalAlignment="Center" Style="{StaticResource StatsCaption}" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding InstallSizeText}" />
+                            <TextBlock Grid.Row="3" Text="Hidden" VerticalAlignment="Center" Style="{StaticResource StatsCaption}" />
+                            <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Hidden}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="Completion" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource SurfaceCard}" Margin="0,0,0,28">
+                    <ItemsControl Focusable="False" ItemsSource="{Binding Completion}" ItemTemplate="{StaticResource StatsBarTemplate}" />
+                </Border>
+
+                <TextBlock Text="Sources" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource SurfaceCard}">
+                    <ItemsControl Focusable="False" ItemsSource="{Binding Sources}" ItemTemplate="{StaticResource StatsBarTemplate}" />
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Grid>

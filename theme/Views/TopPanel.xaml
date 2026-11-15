@@ -1,0 +1,670 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    mc:Ignorable="d">
+
+    <Style x:Key="TopPanelIconStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource FluentIconFont}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <DataTemplate x:Key="TopPanelGeneralViewSettingsTemplate">
+        <TextBlock Text="&#xE9E9;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelFilterPresetsSelectionTemplate">
+        <TextBlock Text="&#xE8A4;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelGroupSettingsTemplate">
+        <TextBlock Text="&#xE81E;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelSortSettingsTemplate">
+        <TextBlock Text="&#xE8CB;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelSwitchDetailsViewTemplate">
+        <TextBlock Text="&#xE90C;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelSwitchGridViewTemplate">
+        <TextBlock Text="&#xF0E2;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelSwitchListViewTemplate">
+        <TextBlock Text="&#xE8FD;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelUpdateButtonTemplate">
+        <TextBlock Text="&#xE896;" Style="{StaticResource TopPanelIconStyle}"
+                   Foreground="{DynamicResource AccentBrush}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelExplorerSwitchTemplate">
+        <TextBlock Text="&#xE8A0;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelSelectRandomGameButtonTemplate">
+        <TextBlock Text="&#xE8B1;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelViewSelectRandomGameButtonTemplate">
+        <TextBlock Text="&#xE8B3;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TopPanelSearchButtonTemplate">
+        <TextBlock Text="&#xE721;" Style="{StaticResource TopPanelIconStyle}" />
+    </DataTemplate>
+
+    <Style x:Key="TopPanelMenu" TargetType="{x:Type ContextMenu}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PopupBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource PopupBorderThickness}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Grid Style="{DynamicResource PopupRoot}">
+                        <Border Style="{DynamicResource PopupShadow}" />
+                        <Border Style="{DynamicResource PopupBorder}" Grid.IsSharedSizeScope="True">
+                            <ScrollViewer Style="{DynamicResource MenuScrollViewer}" x:Name="MenuScroll"
+                                          MaxHeight="{DynamicResource MenuMaxHeight}">
+                                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding PlacementTarget.Name, RelativeSource={RelativeSource Self}}" Value="PART_ElemMainMenu">
+                            <Setter Property="MaxHeight" Value="Infinity" TargetName="MenuScroll" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="TopPanelSeparator" TargetType="Border">
+
+        <Setter Property="Width" Value="1" />
+
+        <Setter Property="Height" Value="20" />
+
+        <Setter Property="Margin" Value="8,0" />
+
+        <Setter Property="VerticalAlignment" Value="Center" />
+
+        <Setter Property="Background" Value="{DynamicResource ControlStrokeBrush}" />
+
+    </Style>
+
+
+    <Style x:Key="TopPanelCommandButton" TargetType="Button">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="Border" Background="Transparent" CornerRadius="{DynamicResource ControlCornerRadius}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <Border x:Name="Indicator" Visibility="Collapsed" Width="16" Height="3" CornerRadius="1.5"
+                                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"
+                                Background="{DynamicResource AccentBrush}" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform />
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" TargetName="Border" />
+                        </Trigger>
+                        <Trigger Property="Tag" Value="{StaticResource True}">
+                            <Setter Property="Background" Value="{DynamicResource SubtleSelectedBrush}" TargetName="Border" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Indicator" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="{StaticResource True}" />
+                                <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TopPanelFilterToggle" TargetType="CheckBox">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Border x:Name="Indicator" Visibility="Collapsed" Width="16" Height="3" CornerRadius="1.5"
+                                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2" Panel.ZIndex="1"
+                                Background="{DynamicResource AccentBrush}" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform />
+                            </Border.RenderTransform>
+                        </Border>
+                        <Border x:Name="Border" Background="Transparent"
+                                CornerRadius="{DynamicResource ControlCornerRadius}">
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE71C;" Style="{StaticResource TopPanelIconStyle}"
+                                           Foreground="{TemplateBinding Foreground}" />
+                                <Ellipse x:Name="ActiveDot" Width="6" Height="6" Margin="0,-2,-4,0"
+                                         HorizontalAlignment="Right" VerticalAlignment="Top"
+                                         Fill="{DynamicResource AccentBrush}" Visibility="Collapsed" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="{StaticResource True}">
+                            <Setter Property="Visibility" Value="Visible" TargetName="ActiveDot" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" TargetName="Border" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleSelectedBrush}" TargetName="Border" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Indicator" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{PluginSettings Plugin=Fluent11Helper, Path=ShowFilterButton, FallbackValue=True}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TopPanelHiddenToggle" TargetType="ToggleButton">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Border x:Name="Indicator" Visibility="Collapsed" Width="16" Height="3" CornerRadius="1.5"
+                                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2" Panel.ZIndex="1"
+                                Background="{DynamicResource AccentBrush}" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform />
+                            </Border.RenderTransform>
+                        </Border>
+                        <Border x:Name="Border" Background="Transparent" CornerRadius="{DynamicResource ControlCornerRadius}">
+                            <TextBlock Text="&#xE7B3;" Style="{StaticResource TopPanelIconStyle}"
+                                       Foreground="{TemplateBinding Foreground}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" TargetName="Border" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleSelectedBrush}" TargetName="Border" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Indicator" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{PluginSettings Plugin=Fluent11Helper, Path=ShowHiddenGamesButton, FallbackValue=False}" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TopPanelMoreMenu" TargetType="Border">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TopPanelNotificationsToggle" TargetType="ToggleButton">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Border x:Name="Border" Background="Transparent"
+                                CornerRadius="{DynamicResource ControlCornerRadius}" />
+                        <TextBlock Text="&#xEA8F;" Style="{StaticResource TopPanelIconStyle}"
+                                   Foreground="{TemplateBinding Foreground}" />
+                        <Border x:Name="Indicator" Visibility="Collapsed" Width="16" Height="3" CornerRadius="1.5"
+                                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"
+                                Background="{DynamicResource AccentBrush}" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform />
+                            </Border.RenderTransform>
+                        </Border>
+                        <Border x:Name="Badge" MinWidth="16" Height="16" CornerRadius="8" Padding="4,0"
+                                Margin="0,3,3,0" Background="{DynamicResource AccentBrush}"
+                                HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <TextBlock Text="{Api Notifications.Count}" FontSize="10"
+                                       Foreground="{DynamicResource TextOnAccentBrush}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" TargetName="Border" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SubtleSelectedBrush}" TargetName="Border" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Indicator" />
+                        </Trigger>
+                        <DataTrigger Binding="{Api Notifications.Count}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="Badge" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="Indicator" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                         From="0" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TopPanel}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TopPanel}">
+                    <Border Height="48" Background="{TemplateBinding Background}"
+                            d:DesignWidth="1280"
+                            d:DataContext="{x:Static DesignMainViewModel.DesignIntance}">
+                        <Grid>
+                        <DockPanel Margin="0,0,146,0" LastChildFill="True">
+                            <StackPanel x:Name="RightEnd" DockPanel.Dock="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                                <Border Style="{StaticResource TopPanelSeparator}" />
+                                <ToggleButton Style="{DynamicResource TopPanelNotificationsToggle}" Tag="Fluent11NotificationsToggle"
+                                              IsChecked="{Settings NotificationPanelVisible, Mode=TwoWay}" />
+                                <CheckBox x:Name="PART_ToggleNotifications" Width="0" IsHitTestVisible="False" Focusable="False">
+                                    <CheckBox.Template>
+                                        <ControlTemplate TargetType="CheckBox" />
+                                    </CheckBox.Template>
+                                </CheckBox>
+                                <Border x:Name="PART_ElemMainMenu" Style="{StaticResource TopPanelMoreMenu}"
+                                        ToolTip="Menu">
+                                    <TextBlock Text="&#xF2C7;" Style="{StaticResource TopPanelIconStyle}" Foreground="{DynamicResource TextBrush}" />
+                                </Border>
+                            </StackPanel>
+                        <Grid ClipToBounds="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="1000000*" MinWidth="16"
+                                                  MaxWidth="{Binding ActualWidth, ElementName=TitleText, Converter={StaticResource MathConverter}, ConverterParameter='Max(16,160-x)'}" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="1000*">
+                                    <ColumnDefinition.MaxWidth>
+                                        <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="Max(0,[0]+[1]+[2]-[3]-164)">
+                                            <Binding Path="ActualWidth" ElementName="RightStart" />
+                                            <Binding Path="ActualWidth" ElementName="PluginArea" />
+                                            <Binding Path="ActualWidth" ElementName="RightEnd" />
+                                            <Binding Path="ActualWidth" ElementName="LeftGroupContent" />
+                                        </MultiBinding>
+                                    </ColumnDefinition.MaxWidth>
+                                </ColumnDefinition>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="1000*">
+                                    <ColumnDefinition.MaxWidth>
+                                        <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="Max(0,[3]+164-[0]-[1]-[2])">
+                                            <Binding Path="ActualWidth" ElementName="RightStart" />
+                                            <Binding Path="ActualWidth" ElementName="PluginArea" />
+                                            <Binding Path="ActualWidth" ElementName="RightEnd" />
+                                            <Binding Path="ActualWidth" ElementName="LeftGroupContent" />
+                                        </MultiBinding>
+                                    </ColumnDefinition.MaxWidth>
+                                </ColumnDefinition>
+                                <ColumnDefinition Width="1000000000*">
+                                    <ColumnDefinition.MinWidth>
+                                        <Binding Path="ActualWidth" ElementName="RightStart" Converter="{StaticResource MathConverter}" ConverterParameter="x+12" />
+                                    </ColumnDefinition.MinWidth>
+                                    <ColumnDefinition.MaxWidth>
+                                        <MultiBinding Converter="{StaticResource MathConverter}" ConverterParameter="x+y+12">
+                                            <Binding Path="ActualWidth" ElementName="RightStart" />
+                                            <Binding Path="ActualWidth" ElementName="PluginArea" />
+                                        </MultiBinding>
+                                    </ColumnDefinition.MaxWidth>
+                                </ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" ClipToBounds="True">
+                                <StackPanel x:Name="HeadGroup" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <TextBlock x:Name="TitleText" Text="{DynamicResource LOCLibrary}" MaxWidth="160" Margin="4,0,0,0"
+                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                               FontSize="{DynamicResource FontSizeLarger}" FontWeight="SemiBold"
+                                               Style="{DynamicResource BaseTextBlockStyle}" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid x:Name="LeftGroup" Grid.Column="2" ClipToBounds="True" Margin="0,0,12,0"
+                                  HorizontalAlignment="Left">
+                                <StackPanel x:Name="LeftGroupContent" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <StackPanel x:Name="PART_PanelMainItems" Orientation="Horizontal">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="Canvas">
+                                                <Setter Property="MaxWidth" Value="0" />
+                                                <Setter Property="Margin" Value="0" />
+                                            </Style>
+                                            <Style TargetType="{x:Type TopPanelItem}" BasedOn="{StaticResource {x:Type TopPanelItem}}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="ContentTemplate" Value="{StaticResource TopPanelUpdateButtonTemplate}">
+                                                        <Setter Property="Width" Value="0" />
+                                                        <Setter Property="MinWidth" Value="0" />
+                                                        <Setter Property="Margin" Value="0" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </Trigger>
+                                                    <Trigger Property="ContentTemplate" Value="{StaticResource TopPanelSwitchDetailsViewTemplate}">
+                                                        <Setter Property="Width" Value="0" />
+                                                        <Setter Property="MinWidth" Value="0" />
+                                                        <Setter Property="Margin" Value="0" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </Trigger>
+                                                    <Trigger Property="ContentTemplate" Value="{StaticResource TopPanelSwitchGridViewTemplate}">
+                                                        <Setter Property="Width" Value="0" />
+                                                        <Setter Property="MinWidth" Value="0" />
+                                                        <Setter Property="Margin" Value="0" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </Trigger>
+                                                    <Trigger Property="ContentTemplate" Value="{StaticResource TopPanelSwitchListViewTemplate}">
+                                                        <Setter Property="Width" Value="0" />
+                                                        <Setter Property="MinWidth" Value="0" />
+                                                        <Setter Property="Margin" Value="0" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </Trigger>
+                                                    <Trigger Property="ContentTemplate" Value="{StaticResource TopPanelExplorerSwitchTemplate}">
+                                                        <Setter Property="Width" Value="0" />
+                                                        <Setter Property="MinWidth" Value="0" />
+                                                        <Setter Property="Margin" Value="0" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                    </StackPanel>
+                                    <Border Margin="8,0,0,0">
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource TopPanelSeparator}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Settings ShowTopPanelSearchBox}" Value="False">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+
+                            <SearchBox x:Name="PART_TextMainSearch" Grid.Column="5"
+                                       Tag="{DynamicResource LOCSearchLabel}"
+                                       Width="220" Height="32" VerticalAlignment="Center"
+                                       WindowChrome.IsHitTestVisibleInChrome="True" />
+
+                            <Grid x:Name="RightGroupHost" Grid.Column="8" Margin="12,0,0,0" ClipToBounds="True">
+                                <DockPanel x:Name="RightGroup" LastChildFill="True" VerticalAlignment="Center">
+                                <StackPanel x:Name="RightStart" DockPanel.Dock="Left" Orientation="Horizontal">
+                                    <Button ContentTemplate="{StaticResource TopPanelSwitchDetailsViewTemplate}"
+                                                  Command="{Binding SwitchDetailsViewCommand}" ToolTip="{DynamicResource LOCDetailsViewLabel}"
+                                                  Visibility="{Settings ShowTopPanelDetailsViewSwitch, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource TopPanelCommandButton}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Settings ViewSettings.GamesViewType}" Value="Details">
+                                                        <Setter Property="Tag" Value="{StaticResource True}" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button ContentTemplate="{StaticResource TopPanelSwitchGridViewTemplate}"
+                                                  Command="{Binding SwitchGridViewCommand}" ToolTip="{DynamicResource LOCGridViewLabel}"
+                                                  Visibility="{Settings ShowTopPanelGridViewSwitch, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource TopPanelCommandButton}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Settings ViewSettings.GamesViewType}" Value="Grid">
+                                                        <Setter Property="Tag" Value="{StaticResource True}" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button ContentTemplate="{StaticResource TopPanelSwitchListViewTemplate}"
+                                                  Command="{Binding SwitchListViewCommand}" ToolTip="{DynamicResource LOCListViewLabel}"
+                                                  Visibility="{Settings ShowTopPanelListViewSwitch, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource TopPanelCommandButton}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Settings ViewSettings.GamesViewType}" Value="List">
+                                                        <Setter Property="Tag" Value="{StaticResource True}" />
+                                                        <Setter Property="IsHitTestVisible" Value="False" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Border Style="{StaticResource TopPanelSeparator}" />
+                                    <Button ContentTemplate="{StaticResource TopPanelExplorerSwitchTemplate}"
+                                                  Command="{Binding ToggleExplorerPanelCommand}" ToolTip="{DynamicResource LOCTopPanelExplorerSwitch}"
+                                                  Visibility="{Settings ShowTopPanelExplorerSwitch, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource TopPanelCommandButton}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Settings ExplorerPanelVisible}" Value="True">
+                                                        <Setter Property="Tag" Value="{StaticResource True}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <CheckBox x:Name="PART_ToggleFilter" ToolTip="{DynamicResource LOCFilters}"
+                                              Style="{DynamicResource TopPanelFilterToggle}" />
+                                    <ToggleButton x:Name="HiddenToggle" Style="{DynamicResource TopPanelHiddenToggle}"
+                                                  ToolTip="Show only hidden games"
+                                                  IsChecked="{Settings FilterSettings.Hidden, Mode=TwoWay}" />
+                                </StackPanel>
+                                <Grid ClipToBounds="True">
+                                    <StackPanel x:Name="PluginArea" Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Border>
+                                            <Border.Style>
+                                                <Style TargetType="Border" BasedOn="{StaticResource TopPanelSeparator}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ActualWidth, ElementName=PluginItems}" Value="0">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Visibility, ElementName=PART_ToggleFilter}" Value="Collapsed" />
+                                                                <Condition Binding="{Binding Visibility, ElementName=HiddenToggle}" Value="Collapsed" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                        </Border>
+                                        <StackPanel x:Name="PluginItems" Orientation="Horizontal">
+                                        <StackPanel x:Name="PART_PanelMainPluginItems" Orientation="Horizontal" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                                </DockPanel>
+                            </Grid>
+                        </Grid>
+                        </DockPanel>
+
+                        <Canvas ClipToBounds="False">
+                            <Grid Style="{DynamicResource PopupRoot}" Canvas.Right="4" Canvas.Top="48"
+                                  Visibility="{Binding Visibility, ElementName=PART_ProgressGlobal}">
+                                <Border Style="{DynamicResource PopupShadow}" />
+                                <Border Style="{DynamicResource PopupBorder}" Padding="14,10,10,10">
+                                    <DockPanel>
+                                        <Button Name="PART_ButtonProgressCancel" DockPanel.Dock="Right"
+                                                Content="{DynamicResource LOCCancelLabel}"
+                                                WindowChrome.IsHitTestVisibleInChrome="True"
+                                                VerticalAlignment="Center" Margin="14,0,0,0" />
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Name="PART_TextProgressText" MaxWidth="280"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       Style="{DynamicResource BaseTextBlockStyle}" />
+                                            <ProgressBar Name="PART_ProgressGlobal" Width="260" Height="3" Margin="0,8,0,0"
+                                                         BorderThickness="0"
+                                                         Foreground="{DynamicResource AccentBrush}"
+                                                         Background="{DynamicResource ControlStrokeBrush}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+                        </Canvas>
+                    </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Settings ShowTopPanelSearchBox}" Value="False">
+                            <Setter TargetName="LeftGroup" Property="Grid.ColumnSpan" Value="6" />
+                            <Setter TargetName="LeftGroup" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="LeftGroup" Property="Margin" Value="0" />
+                            <Setter TargetName="RightGroupHost" Property="Margin" Value="8,0,0,0" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

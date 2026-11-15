@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    mc:Ignorable="d">
+
+    <Style TargetType="{x:Type NotificationPanel}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="NotificationPanel">
+                    <Grid d:DesignWidth="380" d:DesignHeight="400"
+                          d:DataContext="{x:Static DesignMainViewModel.DesignIntance}">
+                        <Border Style="{DynamicResource PopupShadow}" />
+                        <Border Style="{DynamicResource PopupBorder}" Padding="12,10,12,4">
+                            <DockPanel>
+                                <DockPanel DockPanel.Dock="Top" Margin="4,0,0,10">
+                                    <Button Name="PART_ButtonClose" DockPanel.Dock="Right" Visibility="Collapsed" />
+                                    <Button Name="PART_ButtonDismissAll" DockPanel.Dock="Right" Margin="0"
+                                            VerticalAlignment="Center" Height="32" Padding="10,0"
+                                            Background="Transparent" BorderThickness="0"
+                                            FontSize="{DynamicResource FontSizeSmall}"
+                                            Foreground="{DynamicResource TextBrushDarker}"
+                                            Content="{DynamicResource LOCDismissAll}" />
+                                    <TextBlock Text="{DynamicResource LOCNotifications}" FontWeight="SemiBold" VerticalAlignment="Center"
+                                               Style="{DynamicResource BaseTextBlockStyle}" />
+                                </DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="No new notifications" HorizontalAlignment="Center"
+                                           Margin="0,16,0,24" FontSize="{DynamicResource FontSizeSmall}"
+                                           Foreground="{DynamicResource TextBrushDarker}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Items.Count, ElementName=PART_ItemsMessages}" Value="0">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <ItemsControl Name="PART_ItemsMessages" DockPanel.Dock="Top" >
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource NotificationMessage}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.Template>
+                                        <ControlTemplate>
+                                            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                                          VerticalScrollBarVisibility="Auto">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                </ItemsControl>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

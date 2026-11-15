@@ -1,0 +1,54 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    mc:Ignorable="d">
+
+    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrongStrokeBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Left" Width="20" Height="20" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Ellipse x:Name="Outer" Fill="{DynamicResource CheckBoxCheckMarkBkBrush}"
+                                         Stroke="{TemplateBinding BorderBrush}"
+                                         StrokeThickness="{DynamicResource EllipseBorderThickness}" />
+                                <Ellipse x:Name="HoverFill" Fill="{DynamicResource SubtleHoverBrush}" Visibility="Collapsed" />
+                                <Ellipse x:Name="Dot" Width="8" Height="8" Visibility="Collapsed"
+                                         Fill="{DynamicResource TextOnAccentBrush}" />
+                            </Grid>
+                            <ContentPresenter RecognizesAccessKey="True" Margin="8,0,0,0"
+                                              VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="HoverFill" />
+                            <Setter Property="Width" Value="10" TargetName="Dot" />
+                            <Setter Property="Height" Value="10" TargetName="Dot" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Width" Value="6" TargetName="Dot" />
+                            <Setter Property="Height" Value="6" TargetName="Dot" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Fill" Value="{DynamicResource AccentBrush}" TargetName="Outer" />
+                            <Setter Property="Stroke" Value="{DynamicResource AccentBrush}" TargetName="Outer" />
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="HoverFill" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Dot" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

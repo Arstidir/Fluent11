@@ -1,0 +1,346 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent" TextElement.Foreground="{DynamicResource TextBrush}">
+    <Grid.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}" />
+        <Style x:Key="TtbCaption" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrushDarker}" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style x:Key="TtbText" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style x:Key="TtbRowButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Tag" Value="HltbOpenGame" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}"
+                                Padding="8,5" Margin="0,1">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtlePressedBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TtbBarButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Margin" Value="2,0,0,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" />
+                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtlePressedBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TtbFinishedMark" TargetType="TextBlock">
+            <Setter Property="Text" Value="&#xE73E;" />
+            <Setter Property="FontFamily" Value="{DynamicResource FluentIconFont}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsFinished}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="48" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Grid Grid.Row="0" Margin="0,0,146,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border x:Name="LeftSpace" Margin="0,0,12,0" />
+        <SearchBox x:Name="SearchBox" Grid.Column="1" Tag="{DynamicResource LOCSearchLabel}"
+                   Width="220" Height="32" VerticalAlignment="Center"
+                   WindowChrome.IsHitTestVisibleInChrome="True" />
+    </Grid>
+    <DockPanel Grid.Row="0" Margin="0,0,146,0">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
+            <Grid>
+                <Button Style="{StaticResource TtbBarButton}" Content="&#xE71C;" Tag="HltbFilterMenu" ToolTip="Filter" />
+                <Ellipse Width="6" Height="6" Fill="{DynamicResource AccentBrush}" IsHitTestVisible="False"
+                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0"
+                         Visibility="{Binding IsFilterActive, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+        </StackPanel>
+        <Border DockPanel.Dock="Right">
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource TopPanelSeparator}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=SearchBox}" Value="Collapsed">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <DockPanel LastChildFill="False" ClipToBounds="True">
+            <DockPanel.Style>
+                <Style TargetType="DockPanel">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="MaxWidth" Value="{Binding ActualWidth, ElementName=LeftSpace}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=SearchBox}" Value="Collapsed">
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="MaxWidth" Value="Infinity" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+            <TextBlock DockPanel.Dock="Left" Text="Time to Beat" Width="160" Margin="4,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                       FontSize="{DynamicResource FontSizeLarger}" FontWeight="SemiBold" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="DockPanel.Dock" Value="Left" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visibility, ElementName=SearchBox}" Value="Collapsed">
+                                <Setter Property="DockPanel.Dock" Value="Right" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="{Binding SortText}" Style="{StaticResource TtbCaption}" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <Button Style="{StaticResource TtbBarButton}" Content="&#xE8CB;" Tag="HltbSortMenu" ToolTip="Sort" />
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+
+    <Grid Grid.Row="1" Margin="24,20,0,0" Style="{DynamicResource Fluent11PageEntrance}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="360" />
+            <ColumnDefinition Width="360" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Margin="0,-20,32,0" BorderThickness="0,0,1,0" IsHitTestVisible="False"
+                x:Name="PanelSeparator"
+                BorderBrush="{DynamicResource PanelSeparatorBrush}" CornerRadius="{DynamicResource ControlCornerRadius}" />
+        <DockPanel Grid.Column="0" Margin="0,0,32,0">
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,8,12" LastChildFill="False">
+                <TextBlock Text="Games" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0" VerticalAlignment="Center" />
+                <TextBlock Style="{StaticResource TtbCaption}" Margin="8,2,0,0" VerticalAlignment="Center"
+                           Text="{Binding Games.Count, FallbackValue=''}" />
+            </DockPanel>
+
+            <Grid>
+                <ItemsControl x:Name="GameList" ItemsSource="{Binding Games}"
+                              VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                              VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" Padding="0,0,8,0">
+                                <ItemsPresenter Margin="0,0,0,16" />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource TtbRowButton}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="160" />
+                                        <ColumnDefinition Width="130" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="{DynamicResource Fluent11ListCoverWidth}" Height="32" Margin="0,0,12,0"
+                                            HorizontalAlignment="Left" CornerRadius="4">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Converter={StaticResource Fluent11ListArtConverter}}"
+                                                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" />
+                                        </Border.Background>
+                                        <Border CornerRadius="4" Style="{DynamicResource ImageStrokeOverlay}" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,16,0">
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource TtbText}" />
+                                        <TextBlock Text="{Binding Info}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock" BasedOn="{StaticResource TtbCaption}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Info}" Value="">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <DockPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,16,0">
+                                        <TextBlock DockPanel.Dock="Right" Width="40" TextAlignment="Right" Style="{StaticResource TtbCaption}"
+                                                   Text="{Binding ProgressText}" />
+                                        <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" VerticalAlignment="Center" Margin="0,0,8,0" Minimum="0" Maximum="100"
+                                                     Value="{Binding Progress, Mode=OneWay}" />
+                                    </DockPanel>
+                                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding TimesText}" Style="{StaticResource TtbText}" TextAlignment="Right" />
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <TextBlock Style="{StaticResource TtbFinishedMark}" Margin="0,1,6,0" />
+                                            <TextBlock Text="{Binding RemainingText}" Style="{StaticResource TtbCaption}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24" IsHitTestVisible="False">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Items.Count, ElementName=GameList}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Path Data="{DynamicResource FluentHourglassGeometry}" Fill="{DynamicResource TextBrushDarker}" Stretch="Uniform" Width="44" Height="44" HorizontalAlignment="Center" Margin="0,0,0,16" />
+                    <TextBlock Text="No games to show" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"
+                               FontSize="{DynamicResource FontSizeLarge}" FontWeight="SemiBold" />
+                    <TextBlock Text="No games with times match the current options." TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,4,0,0"
+                               Foreground="{DynamicResource TextBrushDarker}" />
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+
+        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" Padding="0,0,24,0" Margin="0,-20,0,0">
+            <StackPanel Margin="0,20,0,16">
+                <TextBlock Text="Overview" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource SurfaceCard}" Margin="0,0,0,28">
+                    <StackPanel>
+                        <TextBlock Text="{Binding BacklogText, FallbackValue='0 h'}"
+                                   FontSize="{DynamicResource FontSizeLargest}" FontWeight="SemiBold" />
+                        <TextBlock Text="left to beat all unfinished games" Style="{StaticResource TtbCaption}" />
+                        <ProgressBar Style="{StaticResource Fluent11ListProgressBar}" Margin="0,12,0,16" Minimum="0" Maximum="100"
+                                     Value="{Binding OverallProgress, Mode=OneWay}" />
+                        <UniformGrid Columns="3" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Finished" Style="{StaticResource TtbCaption}" />
+                                <TextBlock Text="{Binding FinishedCount}" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="In progress" Style="{StaticResource TtbCaption}" />
+                                <TextBlock Text="{Binding InProgressCount}" FontWeight="SemiBold" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Not started" Style="{StaticResource TtbCaption}" />
+                                <TextBlock Text="{Binding NotStartedCount}" FontWeight="SemiBold" />
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <Border Height="1" Background="{DynamicResource PanelSeparatorBrush}" Margin="0,0,0,12" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26" />
+                                <RowDefinition Height="26" />
+                                <RowDefinition Height="26" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Games with data" VerticalAlignment="Center" Style="{StaticResource TtbCaption}" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding GameCount}" />
+                            <TextBlock Grid.Row="1" Text="Time played" VerticalAlignment="Center" Style="{StaticResource TtbCaption}" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding PlayedText}" />
+                            <TextBlock Grid.Row="2" Text="Time to beat (all games)" VerticalAlignment="Center" Style="{StaticResource TtbCaption}" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding TimeToBeatText}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AlmostDone.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="Almost done" Style="{DynamicResource SectionHeaderTextBlock}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource SurfaceCard}">
+                    <ItemsControl Focusable="False" ItemsSource="{Binding AlmostDone}" Margin="-8,-4">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource TtbRowButton}">
+                                    <DockPanel>
+                                        <Border DockPanel.Dock="Left" Width="{DynamicResource Fluent11ListCoverWidth}" Height="32" Margin="0,0,12,0"
+                                                HorizontalAlignment="Left" CornerRadius="4">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding Converter={StaticResource Fluent11ListArtConverter}}"
+                                                            Stretch="UniformToFill" RenderOptions.BitmapScalingMode="Fant" />
+                                            </Border.Background>
+                                            <Border CornerRadius="4" Style="{DynamicResource ImageStrokeOverlay}" />
+                                        </Border>
+                                        <TextBlock DockPanel.Dock="Right" Margin="8,0,0,0" VerticalAlignment="Center"
+                                                   Style="{StaticResource TtbCaption}" Text="{Binding RemainingText}" />
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" Style="{StaticResource TtbText}" />
+                                            <TextBlock Text="{Binding TimesText}" Style="{StaticResource TtbCaption}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Grid>

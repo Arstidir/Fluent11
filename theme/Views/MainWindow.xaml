@@ -1,0 +1,137 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:pcmd="clr-namespace:Playnite.Commands;assembly=Playnite"
+                    mc:Ignorable="d">
+
+    <Style x:Key="Fluent11InfoBar" TargetType="Border">
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="16" />
+        <Setter Property="MaxWidth" Value="720" />
+        <Setter Property="Padding" Value="16,10,12,10" />
+        <Setter Property="Background" Value="{DynamicResource CautionBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}" />
+    </Style>
+
+    <Style TargetType="{x:Type MainWindow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MainWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            d:DesignWidth="1280" d:DesignHeight="960">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.Resources>      
+                                <Storyboard x:Key="VisibilityOn">
+                                    <DoubleAnimation Storyboard.TargetName="PART_Notifications" Storyboard.TargetProperty="Opacity"
+                                                     From="0" To="1" Duration="0:0:0.1" />
+                                </Storyboard>
+                                <Storyboard x:Key="VisibilityOff">
+                                    <DoubleAnimation Storyboard.TargetName="PART_Notifications" Storyboard.TargetProperty="Opacity"
+                                                     From="1" To="0" Duration="0:0:0.1" />
+                                </Storyboard>
+                            </Grid.Resources>
+                            
+                            <DockPanel>
+                                <Grid Panel.ZIndex="999" DockPanel.Dock="Left">
+                                    <Sidebar x:Name="Fluent11Sidebar" />
+                                    <Border Style="{DynamicResource Fluent11OverlayDim}" />
+                                </Grid>                             
+                                <Grid DockPanel.Dock="Top">
+                                    <Border Margin="0,48,0,0" Background="{DynamicResource ContentLayerBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeBrush}" BorderThickness="1,1,0,0"
+                                            CornerRadius="8,0,0,0" IsHitTestVisible="False" />
+                                    <ContentControl Name="PART_ContentView" FocusVisualStyle="{x:Null}">
+                                        <ContentControl.Template>
+                                            <ControlTemplate TargetType="ContentControl">
+                                                <ContentPresenter />
+                                            </ControlTemplate>
+                                        </ContentControl.Template>
+                                    </ContentControl>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource Fluent11InfoBar}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{PluginSettings Plugin=Fluent11Helper, Path=SidebarExpanded, FallbackValue=Missing}" Value="Missing">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <DockPanel>
+                                            <Grid DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,12,0">
+                                                <TextBlock Text="&#xF136;" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                                           Foreground="{DynamicResource CautionBrush}" />
+                                                <TextBlock Text="&#xF13C;" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                                           Foreground="{DynamicResource TextOnAccentBrush}" />
+                                            </Grid>
+                                            <Button DockPanel.Dock="Right" Content="Get add-on" Margin="16,0,0,0" VerticalAlignment="Center"
+                                                    Command="{x:Static pcmd:GlobalCommands.NavigateUrlCommand}"
+                                                    CommandParameter="https://github.com/Arstidir/Fluent11" />
+                                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource TextBrush}"
+                                                       FontFamily="{DynamicResource FontFamily}" FontSize="{DynamicResource FontSize}">
+                                                <Run Text="Fluent 11 Helper is not installed." FontWeight="SemiBold" />
+                                                <Run Text="Some features are missing." />
+                                            </TextBlock>
+                                        </DockPanel>
+                                    </Border>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource Fluent11InfoBar}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{PluginSettings Plugin=Fluent11Helper, Path=VersionMismatch, FallbackValue=False}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <DockPanel>
+                                            <Grid DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,12,0">
+                                                <TextBlock Text="&#xF136;" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                                           Foreground="{DynamicResource CautionBrush}" />
+                                                <TextBlock Text="&#xF13C;" FontFamily="{DynamicResource FluentIconFont}" FontSize="16"
+                                                           Foreground="{DynamicResource TextOnAccentBrush}" />
+                                            </Grid>
+                                            <Button DockPanel.Dock="Right" Content="Get update" Margin="16,0,0,0" VerticalAlignment="Center"
+                                                    Command="{x:Static pcmd:GlobalCommands.NavigateUrlCommand}"
+                                                    CommandParameter="https://github.com/Arstidir/Fluent11/releases/latest" />
+                                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource TextBrush}"
+                                                       FontFamily="{DynamicResource FontFamily}" FontSize="{DynamicResource FontSize}">
+                                                <Run Text="Fluent 11 and Fluent 11 Helper don't match." FontWeight="SemiBold" />
+                                                <Run Text="Update both to the latest version." />
+                                            </TextBlock>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>                            
+                            <NotificationPanel x:Name="PART_Notifications"  
+                                               WindowChrome.IsHitTestVisibleInChrome="True"
+                                               Width="396" MaxHeight="560" Margin="0,48,4,0"
+                                               Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                               HorizontalAlignment="Right" VerticalAlignment="Top"
+                                               AnimatedVisibility.Visibility="{Settings NotificationPanelVisible}"
+                                               AnimatedVisibility.Visible="{StaticResource VisibilityOn}"
+                                               AnimatedVisibility.Collapsed="{StaticResource VisibilityOff}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type LibraryStatistics}">
+        <Setter Property="Margin" Value="0,0,0,-10" />
+    </Style>
+</ResourceDictionary>

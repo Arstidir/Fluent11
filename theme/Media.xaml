@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:popt="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <BitmapImage x:Key="TrayIcon" UriSource="{ThemeFile 'Images/applogo.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="TrayIconWhite" UriSource="{ThemeFile 'Images/applogo_black.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="TrayIconBlack" UriSource="{ThemeFile 'Images/applogo_white.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <TextBlock x:Key="FullscreenModeIcon" Text="&#xE740;" FontFamily="{DynamicResource FluentIconFont}"/>
+
+    <TextBlock x:Key="AddGameIcon" Text="&#xE710;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="UpdateDbIcon" Text="&#xE72C;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="AboutPlayniteIcon" Text="&#xE946;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="ExitIcon" Text="&#xE7E8;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="SettingsIcon" Text="&#xE713;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="AddonsIcon" Text="&#xE74C;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="PlayIcon" Text="&#xE768;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="InstallIcon" Text="&#xE896;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="LinksIcon" Text="&#xE71B;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="OpenFolderIcon" Text="&#xE8B7;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="InstallSizeIcon" Text="&#xEDA2;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="DesktopShortcutIcon" Text="&#xE7F4;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="AddFavoritesIcon" Text="&#xEB51;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="RemoveFavoritesIcon" Text="&#xE8D9;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="HideIcon" Text="&#xED1A;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="UnHideIcon" Text="&#xE890;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="HdrIcon" Text="&#xE706;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="EditGameIcon" Text="&#xE932;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="RemoveGameIcon" Text="&#xE74D;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="DiceIcon" Text="&#xE8B1;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="ManualIcon" Text="&#xE736;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="BackupIcon" Text="&#xE74E;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="RestoreBackupIcon" Text="&#xE777;" FontFamily="{DynamicResource FluentIconFont}"/>
+
+    <TextBlock x:Key="Images/patreon.png" Text="&#xEB51;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="Images/kofi.png" Text="&#xEC32;" FontFamily="{DynamicResource FluentIconFont}"/>
+
+    <TextBlock x:Key="ClearTextIcon" Text="&#xE711;" FontFamily="{DynamicResource FluentIconFont}"/>
+    <TextBlock x:Key="SearchTextIcon" Text="&#xE721;" FontFamily="{DynamicResource FluentIconFont}" />
+
+    <TextBlock x:Key="SidebarLibraryIcon" Text="&#xE80F;" FontFamily="{DynamicResource FluentIconFont}" />
+    <TextBlock x:Key="SidebarStatisticsIcon" Text="&#xEB05;" FontFamily="{DynamicResource FluentIconFont}" />
+
+    <Geometry x:Key="FluentTimerGeometry">M7.5 2C7.22386 2 7 2.22386 7 2.5C7 2.77614 7.22386 3 7.5 3H11.5C11.7761 3 12 2.77614 12 2.5C12 2.22386 11.7761 2 11.5 2H7.5ZM15.1563 3.92899C14.961 3.73373 14.6444 3.73373 14.4492 3.92899C14.2539 4.12426 14.2539 4.44084 14.4492 4.6361L15.8634 6.05031C16.0587 6.24558 16.3752 6.24558 16.5705 6.05031C16.7658 5.85505 16.7658 5.53847 16.5705 5.34321L15.1563 3.92899ZM9.5 6C9.22386 6 9 6.22386 9 6.5V11.5C9 11.7761 9.22386 12 9.5 12C9.77614 12 10 11.7761 10 11.5V6.5C10 6.22386 9.77614 6 9.5 6ZM9.5 18C13.366 18 16.5 14.866 16.5 11C16.5 7.13401 13.366 4 9.5 4C5.63401 4 2.5 7.13401 2.5 11C2.5 14.866 5.63401 18 9.5 18ZM9.5 17C6.18629 17 3.5 14.3137 3.5 11C3.5 7.68629 6.18629 5 9.5 5C12.8137 5 15.5 7.68629 15.5 11C15.5 14.3137 12.8137 17 9.5 17Z</Geometry>
+    <Geometry x:Key="FluentTrophyGeometry">M2.99609 6.99804C2.99609 8.52171 4.13769 9.77722 5.60593 9.97185C6.01527 11.8314 7.5748 13.2597 9.50063 13.4726V14.9684H7.50426C6.39969 14.9684 5.50426 15.8638 5.50426 16.9684V17.4684C5.50426 17.7446 5.72811 17.9684 6.00426 17.9684H14.0043C14.2804 17.9684 14.5043 17.7446 14.5043 17.4684V16.9684C14.5043 15.8638 13.6088 14.9684 12.5043 14.9684H10.5006V13.4726C12.4257 13.2599 13.9848 11.8328 14.395 9.97434C15.8629 9.78134 16.9961 8.52535 16.9961 7.0047V5.50006C16.9961 4.67163 16.3245 4.00006 15.4961 4.00006H14.5007C14.4997 2.89636 13.6047 2.00195 12.5007 2.00195H7.50073C6.39679 2.00195 5.50176 2.89636 5.50073 4.00006H4.49609C3.66767 4.00006 2.99609 4.67163 2.99609 5.50006V6.99804ZM4.49609 5.00006H5.50073V8.93434C4.63664 8.71114 3.99609 7.92741 3.99609 6.99804V5.50006C3.99609 5.22392 4.21995 5.00006 4.49609 5.00006ZM14.5007 5.00006H15.4961C15.7722 5.00006 15.9961 5.22392 15.9961 5.50006V7.0047C15.9961 7.93404 15.3608 8.71499 14.5007 8.9369V5.00006ZM13.5007 4.00195V9.00006C13.5007 10.9331 11.9337 12.5001 10.0007 12.5001C8.12004 12.5001 6.5858 11.0167 6.50415 9.15614V4.00006H6.50073C6.50176 3.44865 6.94908 3.00195 7.50073 3.00195H12.5007C13.053 3.00195 13.5007 3.44967 13.5007 4.00195ZM6.50426 16.9684C6.50426 16.4161 6.95197 15.9684 7.50426 15.9684H12.5043C13.0565 15.9684 13.5043 16.4161 13.5043 16.9684H6.50426Z</Geometry>
+    <Geometry x:Key="FluentHourglassGeometry">F1 M5.02515 13H10.9706C10.9169 12.4806 10.7919 12.1321 10.661 11.8855C10.4963 11.5752 10.2752 11.3361 9.97942 11.0803C9.86945 10.9852 9.77096 10.9056 9.65701 10.8134C9.59998 10.7673 9.53863 10.7177 9.47047 10.6619C9.28949 10.5135 9.06586 10.3245 8.85818 10.1024C8.40115 9.61371 7.99944 8.93739 7.99943 8C7.99951 8.93781 7.59727 9.6143 7.13992 10.1029C6.93206 10.325 6.70824 10.5139 6.52708 10.6623C6.45867 10.7184 6.39755 10.7677 6.34033 10.8139C6.22629 10.906 6.12765 10.9857 6.01756 11.0808C5.72137 11.3367 5.49995 11.5759 5.33507 11.8861C5.20409 12.1326 5.07896 12.481 5.02515 13ZM3.00256 2.64534C2.97854 1.68104 3.80078 1 4.68082 1H11.3185C12.1985 1 13.0208 1.681 12.9968 2.64526C12.9715 3.66216 12.757 4.43599 12.4304 5.05156C12.1047 5.66562 11.6828 6.09278 11.2898 6.43237C11.154 6.54974 11.0143 6.66258 10.8871 6.76535C10.8357 6.80694 10.7862 6.84689 10.7399 6.88481C10.5713 7.02289 10.4328 7.14303 10.3197 7.26381C10.1074 7.49055 9.9997 7.70124 9.9997 8C9.9997 8.29897 10.1073 8.50972 10.3192 8.73635C10.4321 8.85709 10.5704 8.97719 10.7388 9.11524C10.7852 9.15328 10.8347 9.19335 10.8863 9.23508C11.0132 9.33772 11.1525 9.45041 11.288 9.56756C11.6805 9.90708 12.1021 10.3341 12.4279 10.9478C12.7544 11.5631 12.9694 12.3366 12.9957 13.3531C13.0206 14.318 12.198 15 11.3174 15H4.67878C3.79815 15 2.97548 14.318 3.00056 13.353C3.02698 12.3364 3.24225 11.5629 3.56921 10.9476C3.89537 10.3339 4.31737 9.90688 4.71032 9.5674C4.84587 9.45029 4.98527 9.33764 5.11226 9.23502C5.16394 9.19325 5.21357 9.15315 5.26005 9.11508C5.42858 8.97704 5.56701 8.85693 5.68003 8.73618C5.89218 8.50954 5.99975 8.29887 5.9997 8.00008C5.99965 7.7013 5.89196 7.49057 5.67961 7.26382C5.5665 7.14304 5.42799 7.0229 5.25938 6.88482C5.21307 6.84689 5.16366 6.80696 5.1122 6.76538C4.985 6.6626 4.84535 6.54975 4.70953 6.43238C4.31655 6.09278 3.89467 5.66563 3.56894 5.05158C3.24241 4.43602 3.02789 3.66221 3.00256 2.64534ZM4.68082 2C4.27643 2 3.99428 2.3007 4.00225 2.62043C4.02427 3.5043 4.20805 4.12243 4.45234 4.58296C4.69744 5.045 5.0189 5.37807 5.36338 5.67575C5.48618 5.78188 5.60469 5.87762 5.72639 5.97594C5.78105 6.0201 5.83635 6.06478 5.89298 6.11115C6.06784 6.25436 6.24902 6.40889 6.40952 6.58027C6.74439 6.93786 6.9996 7.38146 6.9997 7.99992C6.9998 8.61828 6.74488 9.0619 6.41011 9.41955C6.24967 9.59095 6.06854 9.74549 5.8937 9.8887C5.83682 9.93529 5.78128 9.98016 5.7264 10.0245C5.60496 10.1226 5.48669 10.2182 5.36407 10.3241C5.0195 10.6218 4.69779 10.9549 4.45227 11.4169C4.20756 11.8774 4.02319 12.4954 4.00022 13.379C3.99191 13.6989 4.27408 14 4.67878 14H11.3174C11.7221 14 12.0043 13.6989 11.996 13.3789C11.9731 12.4953 11.789 11.8772 11.5446 11.4167C11.2993 10.9546 10.978 10.6216 10.6338 10.3239C10.5113 10.218 10.3931 10.1224 10.2718 10.0243C10.217 9.97994 10.1615 9.9351 10.1048 9.88855C9.93009 9.74533 9.74913 9.59079 9.58883 9.41938C9.25435 9.06172 8.9997 8.61818 8.9997 8C8.9997 7.38151 9.25488 6.93788 9.58976 6.58028C9.75026 6.40889 9.93145 6.25435 10.1063 6.11114C10.163 6.06475 10.2183 6.02006 10.273 5.97589C10.3947 5.87758 10.5131 5.78185 10.6359 5.67574C10.9804 5.37805 11.3019 5.04498 11.547 4.58294C11.7913 4.12241 11.9751 3.50427 11.9971 2.6204C12.005 2.30069 11.7229 2 11.3185 2H4.68082Z</Geometry>
+    <Geometry x:Key="Fluent11IconLines">M8.54,11.5h8.12c2.24,0,4.06,1.88,4.06,4.19v2.31c-0.02,1.62-1.3,2.92-2.87,2.9-0.86-0.01-1.67-0.42-2.2-1.12l-1.01-1.47h-4.06l-1.01,1.47c-0.97,1.27-2.76,1.49-3.99,0.49-0.68-0.55-1.07-1.38-1.08-2.27v-2.31c0-2.32,1.82-4.19,4.06-4.19ZM8.54,14.14v3.04M7.02,15.66h3.04 M18.69,4c0.16,0.63,0.31,1.26,0.47,1.89,0.66,0.18,1.31,0.36,1.97,0.54-0.61,0.18-1.22,0.36-1.84,0.54-0.2,0.63-0.4,1.26-0.6,1.9-0.19-0.64-0.37-1.28-0.56-1.91-0.62-0.17-1.25-0.35-1.87-0.52,0.65-0.16,1.3-0.32,1.95-0.47,0.16-0.65,0.32-1.31,0.48-1.96Z</Geometry>
+    <Geometry x:Key="Fluent11IconSparkle">M18.69,4c0.16,0.63,0.31,1.26,0.47,1.89,0.66,0.18,1.31,0.36,1.97,0.54-0.61,0.18-1.22,0.36-1.84,0.54-0.2,0.63-0.4,1.26-0.6,1.9-0.19-0.64-0.37-1.28-0.56-1.91-0.62-0.17-1.25-0.35-1.87-0.52,0.65-0.16,1.3-0.32,1.95-0.47,0.16-0.65,0.32-1.31,0.48-1.96Z</Geometry>
+
+    <DataTemplate x:Key="ClearTextIconTemplate">
+        <TextBlock Text="&#xE711;" FontFamily="{DynamicResource FluentIconFont}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SearchTextIconTemplate">
+        <TextBlock Text="&#xE721;" FontFamily="{DynamicResource FluentIconFont}" />
+    </DataTemplate>
+
+    <BitmapImage x:Key="PlayniteLogo" UriSource="{ThemeFile 'Images/applogo.png'}" popt:Freeze="True" />
+    <BitmapImage x:Key="DefaultGameIcon" UriSource="{ThemeFile 'Images/applogo_dark.png'}" popt:Freeze="True" />
+    <BitmapImage x:Key="DefaultGameCover" UriSource="{ThemeFile 'Images/custom_cover_background.png'}" popt:Freeze="True" />
+
+    <BitmapImage x:Key="PowerShellIcon" UriSource="{ThemeFile 'Images/powershell.ico'}" popt:Freeze="True" />    
+    <BitmapImage x:Key="CsharpIcon" UriSource="{ThemeFile 'Images/csharp.ico'}" popt:Freeze="True" />
+</ResourceDictionary>

@@ -1,0 +1,114 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    mc:Ignorable="d">
+
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource PopupBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PopupBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource PopupBorderThickness}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Grid Style="{DynamicResource PopupRoot}">
+                        <Border Style="{DynamicResource PopupShadow}" />
+                        <Border Style="{DynamicResource PopupBorder}" Grid.IsSharedSizeScope="True">
+                            <ScrollViewer Style="{DynamicResource MenuScrollViewer}"
+                                          MaxHeight="{DynamicResource MenuMaxHeight}">
+                                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Fluent11AcrylicContextMenuTemplate" TargetType="{x:Type ContextMenu}">
+        <Border x:Name="MenuRoot" Background="{TemplateBinding Background}" Padding="4" Grid.IsSharedSizeScope="True"
+                BorderThickness="1" BorderBrush="{DynamicResource PopupAcrylicBorderBrush}" CornerRadius="{DynamicResource OverlayCornerRadius}">
+            <Border.RenderTransform>
+                <TranslateTransform />
+            </Border.RenderTransform>
+            <ScrollViewer Style="{DynamicResource MenuScrollViewer}" x:Name="MenuScroll"
+                          MaxHeight="{DynamicResource MenuMaxHeight}">
+                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"/>
+            </ScrollViewer>
+        </Border>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding PlacementTarget.Name, RelativeSource={RelativeSource Self}}" Value="PART_ElemMainMenu">
+                <Setter Property="MaxHeight" Value="Infinity" TargetName="MenuScroll" />
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsOpen, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="Fluent11SlideIn" />
+                    <Condition Binding="{Binding Source={x:Static SystemParameters.ClientAreaAnimation}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="MenuRoot" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.12" />
+                            <DoubleAnimation Storyboard.TargetName="MenuRoot" Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                             From="-8" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+            </MultiDataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="Fluent11MenuActionBar" TargetType="{x:Type MenuItem}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <ContentPresenter ContentSource="Header" Margin="0,1" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Fluent11MenuActionButton" TargetType="{x:Type Button}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="MinWidth" Value="56" />
+        <Setter Property="Padding" Value="6,7,6,5" />
+        <Setter Property="Margin" Value="3,0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"
+                            CornerRadius="{DynamicResource ControlCornerRadius}">
+                        <StackPanel>
+                            <ContentPresenter HorizontalAlignment="Center" Height="16" />
+                            <TextBlock Text="{TemplateBinding Tag}" Margin="0,5,0,0" HorizontalAlignment="Center"
+                                       FontFamily="{DynamicResource FontFamily}" FontSize="{DynamicResource FontSizeSmall}"
+                                       Foreground="{TemplateBinding Foreground}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SubtleHoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SubtlePressedBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
