@@ -12,29 +12,33 @@ Light on resources.
 
 ## Light & Dark
 
-<img src="docs/hero-light-dark.gif" alt="Fluent 11 switching between light and dark with Windows" width="55%" align="left" hspace="24" vspace="8">
-
-Switches between light and dark live with Windows, no restart needed.
-
-<br clear="left">
+<table>
+  <tr>
+    <td width="55%"><img src="docs/hero-light-dark.gif" alt="Fluent 11 switching between light and dark with Windows"></td>
+    <td valign="top">Switches between light and dark live with Windows, no restart needed.</td>
+  </tr>
+</table>
 
 ## Accent color
 
-<img src="docs/accent.gif" alt="Windows accent color in Playnite" width="45%" align="right" hspace="24" vspace="8">
-
-Uses the accent color you picked in Windows, in light and dark.
-
-<br clear="right">
+<table>
+  <tr>
+    <td valign="top">Uses the accent color you picked in Windows, in light and dark.</td>
+    <td width="45%"><img src="docs/accent.gif" alt="Windows accent color in Playnite"></td>
+  </tr>
+</table>
 
 ## Game details
 
-<img src="docs/more-grid-overlay.png" alt="Grid view with details overlay" width="55%" align="left" hspace="24" vspace="8">
-
-In the grid view, the game details open as an overlay over your library.
-
-Description, details, screenshots, achievements and time to beat, all on one page.
-
-<br clear="left">
+<table>
+  <tr>
+    <td width="55%"><img src="docs/more-grid-overlay.png" alt="Grid view with details overlay"></td>
+    <td valign="top">
+      <p>In the grid view, the game details open as an overlay over your library.</p>
+      <p>Description, details, screenshots, achievements and time to beat, all on one page.</p>
+    </td>
+  </tr>
+</table>
 
 ## Built-in pages
 
