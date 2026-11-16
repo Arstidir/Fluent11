@@ -12,7 +12,7 @@ Light on resources.
 
 ## Light & Dark
 
-<img src="docs/hero-light-dark.gif" alt="Fluent 11 switching between light and dark with Windows" width="55%" align="left">
+<img src="docs/hero-light-dark.gif" alt="Fluent 11 switching between light and dark with Windows" width="55%" align="left" hspace="24" vspace="8">
 
 Switches between light and dark live with Windows, no restart needed.
 
@@ -20,7 +20,7 @@ Switches between light and dark live with Windows, no restart needed.
 
 ## Accent color
 
-<img src="docs/accent.gif" alt="Windows accent color in Playnite" width="45%" align="right">
+<img src="docs/accent.gif" alt="Windows accent color in Playnite" width="45%" align="right" hspace="24" vspace="8">
 
 Uses the accent color you picked in Windows, in light and dark.
 
@@ -28,7 +28,7 @@ Uses the accent color you picked in Windows, in light and dark.
 
 ## Game details
 
-<img src="docs/more-grid-overlay.png" alt="Grid view with details overlay" width="55%" align="left">
+<img src="docs/more-grid-overlay.png" alt="Grid view with details overlay" width="55%" align="left" hspace="24" vspace="8">
 
 In the grid view, the game details open as an overlay over your library.
 
@@ -65,14 +65,14 @@ Description, details, screenshots, achievements and time to beat, all on one pag
 - Mica background
 - Covers that grow and shrink with the window
 - Dialogs and add-on windows open centered over Playnite
-- Screenshots in the game details (with Screenshot Utilities)
+- Screenshots in the game details (with Screenshot Utilities), with optional black bar cropping
+- Game trailer as the first thumbnail (with Extra Metadata Loader), played in its own viewer together with screenshots and videos
 
 **Experimental**
 
 - 3:4 poster covers in desktop mode, with your own cover per game
 - Acrylic menus
 - Smoother scrolling with momentum for touchpads (so far only tested with an Apple Magic Trackpad)
-- Crop black bars from screenshot thumbnails
 - Steam reviews and system requirements in the game details
 
 <details>
@@ -88,7 +88,7 @@ Description, details, screenshots, achievements and time to beat, all on one pag
   <img src="docs/settings-experimental.png" alt="Settings: Experimental" width="40%">
 </p>
 
-All options are in **Add-ons (F9) > Extension settings > Generic > Fluent 11 Helper**.
+Open the settings with the **Fluent 11** entry at the bottom of the sidebar, or in **Add-ons (F9) > Extension settings > Generic > Fluent 11 Helper**.
 
 </details>
 
@@ -102,7 +102,13 @@ All options are in **Add-ons (F9) > Extension settings > Generic > Fluent 11 Hel
 4. Restart Playnite.
 5. For the best look, set **Settings > Appearance > Font** to **Segoe UI Variable Text** (comes with Windows 11).
 
-**Optional add-ons:** [Playnite Achievements](https://github.com/justin-delano/PlayniteAchievements), [HowLongToBeat](https://github.com/Lacro59/playnite-howlongtobeat-plugin), [Screenshot Utilities](https://github.com/HerrKnarz/Playnite-Extensions)
+**Optional add-ons:** [Playnite Achievements](https://github.com/justin-delano/PlayniteAchievements), [HowLongToBeat](https://github.com/Lacro59/playnite-howlongtobeat-plugin), [Screenshot Utilities](https://github.com/HerrKnarz/Playnite-Extensions), [Extra Metadata Loader](https://github.com/darklinkpower/PlayniteExtensionsCollection)
+
+## Support
+
+Questions, bug reports and suggestions are welcome in the [Fluent 11 thread on the Playnite Discord](https://discord.com/channels/365863063296933888/1559232305422274663).
+
+Support for further add-ons is not a priority right now.
 
 ## Requirements
 
